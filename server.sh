@@ -1,0 +1,1 @@
+lib/jasmine-jstd-adapter/server.sh
