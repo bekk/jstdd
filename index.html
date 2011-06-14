@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+	<title>flickr - I feel lucky!</title>
+	<script type="text/javascript" src="spec/result-mock.js"></script>
+	<script type="text/javascript" src="src/FlickrResultParser.js"></script>
+    <script type="text/javascript" src="src/FlickrFetcher.js"></script>
+    <script type="text/javascript" src="src/LuckyFlickr.js"></script>
+
+</head>
+<body>
+	<h1>flickr - I feel lucky!</h1>
+    <form action="#" onsubmit ="doSearch();" >
+        <input id="search" type="search" placeholder="Keyword"/>
+    </form>
+    
+	<div id="results"></div>
+	
+	<script>
+        function doSearch() {
+            var keyword = document.getElementById("search").value;
+            
+        }
+
+		var result = flickrResultMock;
+		var parser = new jstdd.FlickrResultParser(result);
+		
+		var output = parser.getMarkup();
+		
+		var resultDiv = document.getElementById("results");
+		resultDiv.innerHTML = output;
+	</script>
+</body>
+</html>
