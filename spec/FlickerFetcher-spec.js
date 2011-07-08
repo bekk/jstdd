@@ -1,18 +1,33 @@
 describe("Flicker result fetcher", function() {
 
 	describe("when querying flickr", function() {
-		it("should do a search with a given keyword against flickr", function() {
+		
+		xit("should do a search with a given keyword", function() {
 			var keyword = "BEKK",
-				outputElementId = "testDomElement",
 				fetcher = new jstdd.FlickrFetcher();
+				
+			//setupAjaxMocking();
+			XMLHttpRequest = function() { return {
+				readyState: 4,
+				status: 200,
+				responseText: flickrResultMock,
+				onreadystatechange: function() {},
+				open: function(type, url, async) {
+					console.log(arguments);
+				}, 
+				send: function() {
+					console.log("Send");
+					this.onreadystatechange();
+				}
+			}; };
 
-			spyOn(fetcher, "getResult");
+			var result = fetcher.getResult(keyword);
 
-			jstdd.LuckyFlickr.fetcher = fetcher;
-			jstdd.LuckyFlickr.search(keyword);
-
-			expect(fetcher.getResult).toHaveBeenCalledWith(keyword);
+			console.log(result, flickrResultMock);
+			expect(result).toBe(flickrResultMock);
 		});
+		
+		
 	});
-
+	
 });
