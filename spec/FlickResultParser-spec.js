@@ -1,6 +1,7 @@
 describe("Flicker result parser", function() {
 	
 	describe("outputting result", function() {
+
 		it("should not output an image when there are no results", function() {
 			var result = [];
 			var parser = new jstdd.FlickrResultParser(result);
