@@ -226,4 +226,4 @@ var flickrResultMock = ({
 			"tags": "norway norge stream hedmark bekk ingeberg"
 	   }
         ]
-})
+});
