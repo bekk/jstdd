@@ -14,9 +14,9 @@ describe("LuckyFlickr", function() {
 		jstdd.LuckyFlickr.resultElementId = resultElementId; 
 		jstdd.LuckyFlickr.fetcher = fetcher;
 		
-		jstdd.LuckyFlickr.search("some random keyword");
-
-		expect(fakeResultElement.innerHTML).toContain("<img");
+		jstdd.LuckyFlickr.search("some random keyword", function(searchResult) {
+			expect(fakeResultElement.innerHTML).toContain("<img");			
+			document.body.removeChild(fakeResultElement); // Clean up
+		});
 	});
-	
 });

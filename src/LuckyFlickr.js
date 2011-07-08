@@ -1,16 +1,20 @@
 var jstdd = jstdd || {};
 
+// Borrowed from CoffeeScript
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 jstdd.LuckyFlickr = {
 	resultElementId: "results",
 	fetcher: new jstdd.FlickrFetcher(),
 
 	search: function(keyword) {
-		var result = this.fetcher.getResult.call(this, keyword),
-			parser = new jstdd.FlickrResultParser(result),
-			
+		this.fetcher.getResult(keyword, __bind(this.onResult, this));
+	},
+	
+	onResult: function(searchResult) {
+		var parser = new jstdd.FlickrResultParser(searchResult),
 			resultElement = document.getElementById(this.resultElementId);
-			// feilsjekk
-			resultElement.innerHTML = parser.getMarkup();
+
+		resultElement.innerHTML = parser.getMarkup();
 	}
 };

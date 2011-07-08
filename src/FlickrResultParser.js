@@ -10,7 +10,7 @@ jstdd.FlickrResultParser = function(searchResult) {
 };
 
 jstdd.FlickrResultParser.prototype.getMarkup = function() {
-	if (this.searchResult.length === 0) {
+	if (!this.searchResult || this.searchResult.length === 0) {
 		return "No results found";
 	}
 

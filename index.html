@@ -19,16 +19,8 @@
 	<script>
         function doSearch() {
             var keyword = document.getElementById("search").value;
-            
+			jstdd.LuckyFlickr.search(keyword);
         }
-
-		var result = flickrResultMock;
-		var parser = new jstdd.FlickrResultParser(result);
-		
-		var output = parser.getMarkup();
-		
-		var resultDiv = document.getElementById("results");
-		resultDiv.innerHTML = output;
 	</script>
 </body>
 </html>
