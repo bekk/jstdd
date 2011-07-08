@@ -1,9 +1,7 @@
 var jstdd = jstdd || {};
 
 
-jstdd.FlickrFetcher = function() {
-
-};
+jstdd.FlickrFetcher = function() { };
 
 jstdd.FlickrFetcher.prototype.getResult = function(keyword) {
 	var xmlhttp = new XMLHttpRequest();

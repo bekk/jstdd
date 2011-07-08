@@ -14,4 +14,5 @@ describe("Flicker result fetcher", function() {
 			expect(fetcher.getResult).toHaveBeenCalledWith(keyword);
 		});
 	});
+
 });
