@@ -1,5 +1,4 @@
-/*
-it("should do a search with a given keyword against flickr", function() {
+/*it("should do a search with a given keyword against flickr", function() {
 	var keyword = "BEKK",
 		fetcher = new jstdd.FlickrFetcher();
 
@@ -9,20 +8,17 @@ it("should do a search with a given keyword against flickr", function() {
 	jstdd.LuckyFlickr.search(keyword);
 
 	expect(fetcher.getResult).toHaveBeenCalledWith(keyword);
-});
+});*/
 
 it("should display the search result in the specified result element", function() {
-	var result = flickrResultMock,
-	 	parser = new jstdd.FlickrResultParser(result),
-	
-		fetcher = new jstdd.FlickrFetcher();
-		fetcher.setParser(parser);
-	
-	var keyword = "BEKK",
-	 	fakeResult = flickrResultMock,
-		resultElementId = "testDomElement",
-		fetcher = new jstdd.FlickrFetcher();
-	
+	var fakeResult = flickrResultMock,
+	 	parser = new jstdd.FlickrResultParser(fakeResult),
+		fetcher = new jstdd.FlickrFetcher(),
+	    keyword = "BEKK",
+		resultElementId = "testDomElement";
+
+    fetcher.setParser(parser);
+
 	spyOn(fetcher, "getResult").andReturn(fakeResult);
 
 	// private method
@@ -31,8 +27,8 @@ it("should display the search result in the specified result element", function(
 	
 	jstdd.LuckyFlickr.resultElementId = resultElementId; 
 	jstdd.LuckyFlickr.fetcher = fetcher;
+	jstdd.LuckyFlickr.parser = parser;
 	jstdd.LuckyFlickr.search(keyword);
 
-	expect(fakeResultElement.innerHTML, toContain())
+	expect(fakeResultElement.innerHTML).toContain("<img");
 });
-*/
