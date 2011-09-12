@@ -8,6 +8,8 @@ jstdd.LuckyFlickr = {
 	fetcher: new jstdd.FlickrFetcher(),
 
 	search: function(keyword) {
+        var resultElement = document.getElementById(this.resultElementId);
+        resultElement.innerHTML = "Loading";
 		this.fetcher.getResult(keyword, __bind(this.onResult, this));
 	},
 	
