@@ -1,6 +1,11 @@
-var jstdd = jstdd || {};
+var jstdd = jstdd || {}; // Ensure that the namespace exist
 
-
+/**
+ * Does the actual request to Flickr.
+ *
+ * NOTE: Only has one method, and could have been written much
+ *       easier. But... whatevvah!
+ */
 jstdd.FlickrFetcher = function() { };
 
 jstdd.FlickrFetcher.prototype.getResult = function(keyword, completeCallback) {

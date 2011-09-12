@@ -1,7 +1,7 @@
 describe("Flicker result fetcher", function() {
 
 	describe("when querying flickr", function() {
-		
+
 		beforeEach(function() {
 			this.originalXhr = XMLHttpRequest;
 		    XMLHttpRequest = function() {
@@ -19,23 +19,20 @@ describe("Flicker result fetcher", function() {
 
 		});
 
-		afterEach(function() {
-			XMLHttpRequest = this.originalXhr;
-		});
-		
-		it("should do a search with a given keyword", function() {
-			var keyword = "BEKK",
-				fetcher = new jstdd.FlickrFetcher();
+        afterEach(function() {
+            XMLHttpRequest = this.originalXhr;
+        });
 
-			var result;
-			fetcher.getResult(keyword, function(searchResult) {
-				result = searchResult;
-			});
+        it("should do a search with a given keyword", function() {
+            var keyword = "BEKK",
+                fetcher = new jstdd.FlickrFetcher();
 
-		    expect(result).toBe(flickrResultMock);
-		});
-		
-		
-	});
-	
+            var result;
+            fetcher.getResult(keyword, function(searchResult) {
+                result = searchResult;
+            });
+
+            expect(result).toBe(flickrResultMock);
+        });
+    });
 });

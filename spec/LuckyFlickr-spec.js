@@ -2,8 +2,8 @@ describe("LuckyFlickr", function() {
 
     it("should display the search result in the specified result element", function() {
         var fakeResult = flickrResultMock,
-                fetcher = new jstdd.FlickrFetcher(),
-                resultElementId = "testDomElement";
+            fetcher = new jstdd.FlickrFetcher(),
+            resultElementId = "testDomElement";
 
         spyOn(fetcher, "getResult").andReturn(fakeResult);
 
@@ -22,8 +22,8 @@ describe("LuckyFlickr", function() {
 
     it("should display a loading indicator while searching flickr", function() {
         var fakeResult = flickrResultMock,
-                fetcher = new jstdd.FlickrFetcher(),
-                loadingElementId = "testLoadingDiv";
+            fetcher = new jstdd.FlickrFetcher(),
+            loadingElementId = "testLoadingDiv";
 
         spyOn(fetcher, "getResult").andReturn(fakeResult);
 
@@ -34,7 +34,7 @@ describe("LuckyFlickr", function() {
         jstdd.LuckyFlickr.resultElementId = loadingElementId;
         jstdd.LuckyFlickr.fetcher = fetcher;
 
-        jstdd.LuckyFlickr.search("some random keyword", function(ignore) {});
+        jstdd.LuckyFlickr.search("some random keyword", function(ignore) { });
 
         expect(fakeLoadingElement.innerHTML).toContain("Loading");
     });
