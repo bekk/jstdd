@@ -7,20 +7,21 @@
     <script type="text/javascript" src="src/FlickrFetcher.js"></script>
     <script type="text/javascript" src="src/LuckyFlickr.js"></script>
 
-</head>
-<body>
-	<h1>flickr - I feel lucky!</h1>
-    <form action="#" onsubmit ="doSearch();" >
-        <input id="search" type="search" placeholder="Keyword"/>
-    </form>
-    
-	<div id="results"></div>
-	
-	<script>
-        function doSearch() {
+    <script>
+        function doSearch(e) {
             var keyword = document.getElementById("search").value;
 			jstdd.LuckyFlickr.search(keyword);
         }
 	</script>
+
+</head>
+<body>
+	<h1>flickr - I feel lucky!</h1>
+    <form action="#" onsubmit="doSearch(); return false;">
+        <input id="search" type="search" placeholder="Keyword"/>
+        <input type="submit"/>
+    </form>
+
+	<div id="results"></div>
 </body>
 </html>
