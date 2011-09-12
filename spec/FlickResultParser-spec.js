@@ -12,7 +12,7 @@ describe("Flicker result parser", function() {
         });
 
         it("should output the image from the result", function() {
-            var result = flickrResultMock,
+            var result = flickrResultStub,
                 parser = new jstdd.FlickrResultParser(result),
 
                 output = parser.getMarkup();

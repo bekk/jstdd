@@ -1,7 +1,7 @@
 describe("LuckyFlickr", function() {
 
     it("should display the search result in the specified result element", function() {
-        var fakeResult = flickrResultMock,
+        var fakeResult = flickrResultStub,
             fetcher = new jstdd.FlickrFetcher(),
             resultElementId = "testDomElement";
 
@@ -21,7 +21,7 @@ describe("LuckyFlickr", function() {
     });
 
     it("should display a loading indicator while searching flickr", function() {
-        var fakeResult = flickrResultMock,
+        var fakeResult = flickrResultStub,
             fetcher = new jstdd.FlickrFetcher(),
             loadingElementId = "testLoadingDiv";
 
