@@ -8,10 +8,14 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
  * and delegates the search request.
  */
 jstdd.LuckyFlickr = {
-    // The DOM element that will display the results
+    // The ID to the DOM element that will display the results
 	resultElementId: "results",
 
     // The implementation of the fetcher that does the request and gets the result
+    
+    // Note: In a larger app, this could be injected in the constructor
+    //       to enable dependency injection, but we saw no need for that
+    //       in this app.
 	fetcher: new jstdd.FlickrFetcher(),
 
     /**
