@@ -23,7 +23,7 @@ describe("Flicker result fetcher", function() {
             XMLHttpRequest = this.originalXhr;
         });
 
-        it("should do a search with a given keyword", function() {
+        it("should do a search and call the callback function", function() {
             var keyword = "BEKK",
                 fetcher = new jstdd.FlickrFetcher();
 
