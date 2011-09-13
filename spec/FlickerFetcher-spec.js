@@ -8,7 +8,7 @@ describe("Flicker result fetcher", function() {
 		        return {
 		            readyState: 4,
 		            status: 200,
-		            responseText: flickrResultMock,
+		            responseText: flickrResultStub,
 		            onreadystatechange: function() {},
 		            open: function(type, url, async) { },
 		            send: function() {
@@ -32,7 +32,7 @@ describe("Flicker result fetcher", function() {
                 result = searchResult;
             });
 
-            expect(result).toBe(flickrResultMock);
+            expect(result).toBe(flickrResultStub);
         });
     });
 });
