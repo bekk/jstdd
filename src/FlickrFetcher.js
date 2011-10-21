@@ -2,22 +2,35 @@ var jstdd = jstdd || {}; // Ensure that the namespace exist
 
 /**
  * Does the actual request to Flickr.
- *
- * NOTE: Only has one method, and could have been written much
- *       easier. But... whatevvah!
  */
-jstdd.FlickrFetcher = function() { };
+jstdd.FlickrFetcher = function() {
+    // Private methods
+    function getRandomNumber() {
+        return ~~(Math.random() * 1000000000);
+    }
 
-jstdd.FlickrFetcher.prototype.getResult = function(keyword, completeCallback) {
-	var xmlhttp = new XMLHttpRequest();
-	var url = "http://localhost/flickr/photos_public.gne?tags=" + keyword + "&tagmode=any&format=json&jsoncallback=?";
+    // Public API
+    return {
+        /**
+         * Uses JSON-P to retrieve the result from Flickr.
+         *
+         * @param keyword What to search for
+         * @param completeCallback Callback which handles the response
+         */
+        getResult: function(keyword, completeCallback) {
 
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			completeCallback(eval(xmlhttp.responseText));
-		}
-	};
+            var script = document.createElement('script'),
+                randomNumber = getRandomNumber();
 
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
+            script.src = "http://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&tagmode=any&format=json&jsoncallback=handleResult_" + randomNumber;
+            document.body.appendChild(script);
+
+            window[jstdd.FlickrFetcher.ResultHandlerPrefix + randomNumber] = completeCallback;
+
+            return randomNumber;
+        }
+    };
 };
+
+// Static 
+jstdd.FlickrFetcher.ResultHandlerPrefix = "handleResult_";
