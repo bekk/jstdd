@@ -7,9 +7,12 @@
     <script type="text/javascript" src="src/LuckyFlickr.js"></script>
 
     <script>
+        var fetcher = new jstdd.FlickrFetcher();
+        var luckyFlickr = new jstdd.LuckyFlickr(fetcher);
+
         function doSearch(e) {
             var keyword = document.getElementById("search").value;
-			jstdd.LuckyFlickr.search(keyword);
+            luckyFlickr.search(keyword);
         }
 	</script>
 

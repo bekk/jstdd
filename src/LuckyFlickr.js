@@ -1,34 +1,24 @@
 var jstdd = jstdd || {}; // Ensure that the namespace exist
 
 // Borrowed from CoffeeScript
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+var __bind = function(fn, me) {
+    return function() {
+        return fn.apply(me, arguments);
+    };
+};
 
 /**
  * The main class that handles interaction with the UI
  * and delegates the search request.
  */
-jstdd.LuckyFlickr = {
-    // The ID to the DOM element that will display the results
-	resultElementId: "results",
+jstdd.LuckyFlickr = function(fetcher) {
+    var _fetcher = fetcher;
 
-    // The implementation of the fetcher that does the request and gets the result
-    
-    // Note: In a larger app, this could be injected in the constructor
-    //       to enable dependency injection, but we saw no need for that
-    //       in this app.
-	fetcher: new jstdd.FlickrFetcher(),
+    // Private methods
 
-    /**
-     * When searching, the result element is replaced with a loading message.
-     *
-     * @param keyword to search for
-     */
-	search: function(keyword) {
-        var resultElement = document.getElementById(this.resultElementId);
-
-        resultElement.innerHTML = "Loading";
-		this.fetcher.getResult(keyword, __bind(this.onResult, this));
-	},
+    function getResultElement() {
+        return document.getElementById(jstdd.LuckyFlickr.ResultElementId);
+    }
 
     /**
      * Handles the callback when the result is received.
@@ -36,10 +26,32 @@ jstdd.LuckyFlickr = {
      *
      * @param searchResult JSON object containing the search result
      */
-	onResult: function(searchResult) {
-		var parser = new jstdd.FlickrResultParser(searchResult),
-			resultElement = document.getElementById(this.resultElementId);
+    function onResult(searchResult) {
+        var parser = new jstdd.FlickrResultParser(searchResult),
+            resultElement = getResultElement();
 
-		resultElement.innerHTML = parser.getMarkup();
-	}
+        resultElement.innerHTML = parser.getMarkup();
+    }
+
+    // The implementation of the fetcher that does the request and gets the result
+
+    return {
+        /**
+         * When searching, the result element is replaced with a loading message.
+         *
+         * @param keyword to search for
+         */
+        search: function(keyword) {
+            var resultElement = getResultElement();
+
+            resultElement.innerHTML = "Loading";
+
+            _fetcher.getResult(keyword, onResult);
+        }
+    }
 };
+
+// Static
+
+// The ID to the DOM element that will display the results
+jstdd.LuckyFlickr.ResultElementId = "results";

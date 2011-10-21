@@ -1,41 +1,45 @@
 describe("LuckyFlickr", function() {
 
+    var fetcher;
+    var fakeResultElement;
+
+    beforeEach(function() {
+        createFakeResultElement();
+
+        fetcher = new jstdd.FlickrFetcher();
+        spyOn(fetcher, "getResult").andReturn(flickrResultStub);
+    });
+
+    afterEach(function() {
+        removeFakeResultElement();
+    });
+
+
     it("should display the search result in the specified result element", function() {
-        var fakeResult = flickrResultStub,
-            fetcher = new jstdd.FlickrFetcher(),
-            resultElementId = "testDomElement";
+        var luckyFlickr = new jstdd.LuckyFlickr(fetcher);
 
-        spyOn(fetcher, "getResult").andReturn(fakeResult);
-
-        var fakeResultElement = document.createElement("div");
-        fakeResultElement.setAttribute("id", resultElementId);
-        document.body.appendChild(fakeResultElement);
-
-        jstdd.LuckyFlickr.resultElementId = resultElementId;
-        jstdd.LuckyFlickr.fetcher = fetcher;
-
-        jstdd.LuckyFlickr.search("some random keyword", function(searchResult) {
+        luckyFlickr.search("some random keyword", function(searchResult) {
             expect(fakeResultElement.innerHTML).toContain("<img");
-            document.body.removeChild(fakeResultElement); // Clean up
         });
     });
 
     it("should display a loading indicator while searching flickr", function() {
-        var fakeResult = flickrResultStub,
-            fetcher = new jstdd.FlickrFetcher(),
-            loadingElementId = "testLoadingDiv";
+        var luckyFlickr = new jstdd.LuckyFlickr(fetcher);
 
-        spyOn(fetcher, "getResult").andReturn(fakeResult);
+        luckyFlickr.search("some random keyword", function(ignore) { });
 
-        var fakeLoadingElement = document.createElement("div");
-        fakeLoadingElement.setAttribute("id", loadingElementId);
-        document.body.appendChild(fakeLoadingElement);
-
-        jstdd.LuckyFlickr.resultElementId = loadingElementId;
-        jstdd.LuckyFlickr.fetcher = fetcher;
-
-        jstdd.LuckyFlickr.search("some random keyword", function(ignore) { });
-
-        expect(fakeLoadingElement.innerHTML).toContain("Loading");
+        expect(fakeResultElement.innerHTML).toContain("Loading");
     });
+
+    // Test helpers
+
+    function createFakeResultElement() {
+        fakeResultElement = document.createElement("div");
+        fakeResultElement.setAttribute("id", jstdd.LuckyFlickr.ResultElementId);
+        document.body.appendChild(fakeResultElement);
+    }
+
+    function removeFakeResultElement() {
+        document.body.removeChild(fakeResultElement);
+    }
 });
